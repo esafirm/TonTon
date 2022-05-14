@@ -26,6 +26,7 @@ dependencyResolutionManagement {
             library('compose.icon', 'androidx.compose.material', 'material-icons-extended').versionRef('compose')
             library('compose.constraintlayout', 'androidx.constraintlayout:constraintlayout-compose:1.0.0')
             library('compose.imageloader', 'io.coil-kt:coil-compose:2.0.0-rc03')
+            library('compose.navigator', 'cafe.adriel.voyager:voyager-navigator:1.0.0-rc02')
         }
     }
 }

@@ -47,6 +47,7 @@ dependencies {
     implementation libs.compose.constraintlayout
     implementation libs.compose.icon
     implementation libs.compose.imageloader
+    implementation libs.compose.navigator
 
     debugImplementation libs.compose.tooling
 

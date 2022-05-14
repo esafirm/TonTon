@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
+import nolambda.stream.tonton.peoplebrowser.ui.theme.BlueButton
+import nolambda.stream.tonton.peoplebrowser.ui.theme.RedButton
 import kotlin.math.roundToInt
 
 /**
@@ -91,7 +93,7 @@ fun CardStack(
                     backgroundColor = Color.White,
                     elevation = FloatingActionButtonDefaults.elevation(5.dp)
                 ) {
-                    Icon(Icons.Filled.ThumbDownAlt, contentDescription = "", tint = Color.Red)
+                    Icon(Icons.Filled.ThumbDownAlt, contentDescription = "", tint = RedButton)
                 }
                 Spacer(modifier = Modifier.width(70.dp))
                 FloatingActionButton(
@@ -99,7 +101,7 @@ fun CardStack(
                     backgroundColor = Color.White,
                     elevation = FloatingActionButtonDefaults.elevation(5.dp)
                 ) {
-                    Icon(Icons.Filled.ThumbUpAlt, contentDescription = "", tint = Color.Green)
+                    Icon(Icons.Filled.ThumbUpAlt, contentDescription = "", tint = BlueButton)
                 }
             }
         }

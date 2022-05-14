@@ -1,35 +1,32 @@
 package nolambda.stream.tonton.peoplebrowser
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import cafe.adriel.voyager.core.screen.Screen
 import nolambda.stream.tonton.peoplebrowser.ui.components.CardStack
+import nolambda.stream.tonton.peoplebrowser.ui.components.HeaderMenu
 import nolambda.stream.tonton.peoplebrowser.ui.components.Item
 import nolambda.stream.tonton.peoplebrowser.ui.theme.TonTonTheme
 
-@OptIn(ExperimentalMaterialApi::class)
-class PeopleBrowser : ComponentActivity() {
+class PeopleBrowserScreen : Screen {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
+    @Composable
+    override fun Content() {
+        Column {
+            HeaderMenu(
+                onProfilePressed = {},
+                onMatchPressed = {}
+            )
             PeopleBrowserContent()
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
 
 @Composable
