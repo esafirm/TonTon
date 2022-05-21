@@ -34,3 +34,5 @@ dependencyResolutionManagement {
 rootProject.name = 'TonTon'
 include ':app'
 include ':peoplebrowser'
+include ':chat'
+include ':navigation'
