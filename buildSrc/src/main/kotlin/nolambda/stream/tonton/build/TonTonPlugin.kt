@@ -4,14 +4,19 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.provideDelegate
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("UnstableApiUsage")
 class TonTonPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.apply(plugin = "com.android.library")
         target.apply(plugin = "org.jetbrains.kotlin.android")
+
+        val extension = target.extensions.create<TonTonLibraryExtension>("tonton")
 
         val globalExt = target.rootProject.extra
 
@@ -20,7 +25,6 @@ class TonTonPlugin : Plugin<Project> {
         val targetSdk: Int by globalExt
 
         val composeVersion: String by globalExt
-
 
         target.androidLib {
             this.compileSdk = compileSdk
@@ -49,5 +53,27 @@ class TonTonPlugin : Plugin<Project> {
                 }
             }
         }
+
+        target.tasks.withType(KotlinCompile::class) {
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_1_8.toString()
+            }
+        }
+
+        target.androidComponents {
+            finalizeDsl {
+                val isComposeEnabled = extension.features.isComposeEnabled
+                if (isComposeEnabled) {
+                    target.addComposeDependencies(composeVersion)
+                }
+
+                it.buildFeatures.compose = isComposeEnabled
+
+            }
+        }
+    }
+
+    private fun Project.addComposeDependencies(composeVersion: String) {
+        dependencies.add("implementation", "androidx.compose.foundation:foundation:$composeVersion")
     }
 }
