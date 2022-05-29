@@ -13,8 +13,8 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import nolambda.stream.core.element.MainHeader
 import nolambda.stream.tonton.peoplebrowser.ui.components.CardStack
-import nolambda.stream.tonton.peoplebrowser.ui.components.HeaderMenu
 import nolambda.stream.tonton.peoplebrowser.ui.components.Item
 import nolambda.stream.tonton.peoplebrowser.ui.theme.TonTonTheme
 import nolambda.stream.toton.navigation.TonTonScreen
@@ -24,10 +24,10 @@ class PeopleBrowserScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val matchScreen = rememberScreen(TonTonScreen.Chat)
+        val matchScreen = rememberScreen(TonTonScreen.Match)
 
         Column {
-            HeaderMenu(
+            MainHeader(
                 onProfilePressed = {},
                 onMatchPressed = {
                     navigator.push(matchScreen)

@@ -19,5 +19,9 @@ gradlePlugin {
             id = "nolambda.stream.tonton.build.library"
             implementationClass = "nolambda.stream.tonton.build.TonTonPlugin"
         }
+        register("tonton-app") {
+            id = "nolambda.stream.tonton.build.app"
+            implementationClass = "nolambda.stream.tonton.build.TonTonAppPlugin"
+        }
     }
 }

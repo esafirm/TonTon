@@ -1,0 +1,23 @@
+plugins {
+    id 'nolambda.stream.tonton.build.library'
+}
+
+tonton {
+    features {
+        it.compose()
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+
+    api libs.compose.ui
+    api libs.compose.material
+    api libs.compose.preview
+    api libs.compose.constraintlayout
+    api libs.compose.icon
+    api libs.compose.imageloader
+
+    api libs.compose.navigator
+    api libs.sketchbook
+}

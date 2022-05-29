@@ -1,33 +1,48 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package nolambda.stream.tonton.chat
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import coil.compose.AsyncImage
+import nolambda.stream.core.element.BackHeader
 import nolambda.stream.tonton.chat.model.ChatModel
 import nolambda.stream.tonton.chat.model.Profile
 
-class ChatScreen : Screen {
+class MatchScreen : Screen {
 
     @Composable
     override fun Content() {
-        ChatContent()
+        MatchContent()
     }
 }
 
@@ -67,46 +82,78 @@ private val chatItems = listOf(
 )
 
 @Composable
-fun ChatContent() {
-    LazyColumn(modifier = Modifier.fillMaxHeight()) {
-        items(chatItems) { chat ->
-            ChatItem(chat)
+fun MatchContent() {
+    Column {
+        BackHeader(headerTitle = "Match")
+        LazyColumn(
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            items(chatItems) { chat ->
+                Surface(
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(),
+                        onClick = {}
+                    )
+                ) {
+                    MatchUiItem(chat)
+                }
+            }
         }
     }
 }
 
 @Composable
-fun ChatItem(
+fun MatchUiItem(
     chatItem: ChatModel
 ) {
     val profile = chatItem.profile
 
-    Row {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+    ) {
         AsyncImage(
             model = profile.avatar,
             contentDescription = "Avatar",
             modifier = Modifier
-                .size(32.dp)
+                .size(36.dp)
                 .background(color = Color.LightGray, shape = CircleShape)
                 .clip(CircleShape)
         )
 
-        if (chatItem.matched) {
-            Text(text = profile.name)
-        } else {
+        Spacer(modifier = Modifier.size(8.dp))
 
-            val drawMeString = buildAnnotatedString {
-                append("Draw me ")
-                withStyle(SpanStyle(fontWeight = FontWeight.W700)) {
-                    append(profile.drawMe)
+
+        val captionString =
+            buildAnnotatedString {
+                if (chatItem.matched) {
+                    append("Draw me ")
+                    withStyle(SpanStyle(fontWeight = FontWeight.W700)) {
+                        append(profile.drawMe)
+                    }
+                } else {
+                    withStyle(
+                        SpanStyle(
+                            fontStyle = FontStyle.Italic,
+                            color = Color.Gray
+                        )
+                    ) {
+                        append("You've matched. Say hi!")
+                    }
                 }
             }
 
-            Column {
-                Text(text = profile.name)
-                Text(text = drawMeString)
-            }
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(text = profile.name)
+            Text(text = captionString)
         }
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    MatchContent()
+}

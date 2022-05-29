@@ -44,7 +44,7 @@ android {
 
 dependencies {
     implementation projects.peoplebrowser
-    implementation projects.chat
+    implementation projects.match
     implementation projects.navigation
 
     implementation libs.compose.navigator
