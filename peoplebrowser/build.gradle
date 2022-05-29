@@ -14,14 +14,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
     implementation 'androidx.activity:activity-compose:1.4.0'
 
+    // Accessing the project using type-safe API
+    // https://docs.gradle.org/7.4/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
     implementation projects.navigation
+    implementation projects.coreElement
 
-    implementation libs.compose.ui
-    implementation libs.compose.material
-    implementation libs.compose.preview
-    implementation libs.compose.constraintlayout
-    implementation libs.compose.icon
-    implementation libs.compose.imageloader
     implementation libs.compose.navigator
 
     debugImplementation libs.compose.tooling
