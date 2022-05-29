@@ -23,11 +23,11 @@ import coil.compose.AsyncImage
 import nolambda.stream.tonton.chat.model.ChatModel
 import nolambda.stream.tonton.chat.model.Profile
 
-class ChatScreen : Screen {
+class MatchScreen : Screen {
 
     @Composable
     override fun Content() {
-        ChatContent()
+        MatchContent()
     }
 }
 
@@ -67,16 +67,16 @@ private val chatItems = listOf(
 )
 
 @Composable
-fun ChatContent() {
+fun MatchContent() {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(chatItems) { chat ->
-            ChatItem(chat)
+            MatchUiItem(chat)
         }
     }
 }
 
 @Composable
-fun ChatItem(
+fun MatchUiItem(
     chatItem: ChatModel
 ) {
     val profile = chatItem.profile

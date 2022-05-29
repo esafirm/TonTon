@@ -4,5 +4,5 @@ import cafe.adriel.voyager.core.registry.ScreenProvider
 
 sealed class TonTonScreen : ScreenProvider {
     object PeopleBrowser : TonTonScreen()
-    object Chat : TonTonScreen()
+    object Match : TonTonScreen()
 }

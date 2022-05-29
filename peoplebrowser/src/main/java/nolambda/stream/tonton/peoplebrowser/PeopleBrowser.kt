@@ -24,7 +24,7 @@ class PeopleBrowserScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val matchScreen = rememberScreen(TonTonScreen.Chat)
+        val matchScreen = rememberScreen(TonTonScreen.Match)
 
         Column {
             HeaderMenu(
