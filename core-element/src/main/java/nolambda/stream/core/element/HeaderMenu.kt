@@ -3,6 +3,7 @@ package nolambda.stream.core.element
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -58,17 +59,24 @@ fun BackHeader(
     showBack: Boolean = true
 ) {
     val navigator = LocalNavigator.currentOrThrow
-    HeaderLayout {
-        IconButton({
-            navigator.pop()
-        }) {
-            Icon(
-                Icons.Filled.ArrowBack,
-                contentDescription = "Back button",
-                tint = Color.Gray,
-                modifier = Modifier.size(32.dp)
-            )
+    val arrangement = if (showBack) Arrangement.Start else Arrangement.Center
+
+    HeaderLayout(horizontalArrangement = arrangement) {
+        if (showBack) {
+            IconButton({
+                navigator.pop()
+            }) {
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    contentDescription = "Back button",
+                    tint = Color.Gray,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.size(16.dp))
         }
+
         if (headerTitle.isNotEmpty()) {
             Text(headerTitle, fontSize = 20.sp)
         }
@@ -77,14 +85,15 @@ fun BackHeader(
 
 @Composable
 private fun HeaderLayout(
-    children: @Composable () -> Unit
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.SpaceBetween,
+    children: @Composable () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(horizontal = 16.dp, vertical = 12.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = horizontalArrangement,
         verticalAlignment = Alignment.CenterVertically
     ) {
         children()
